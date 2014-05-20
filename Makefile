@@ -7,8 +7,6 @@ VPATH += base datastructure
 SOURCES = \
   base.cpp \
   base_cmessage.cpp \
-  base_cmutex.cpp \
-  base_creference.cpp \
   base_cobject.cpp \
   base_cstring.cpp \
   base_ctime.cpp \

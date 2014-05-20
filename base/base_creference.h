@@ -14,17 +14,11 @@
 
 #include "base_configuration.h"
 
-#include "base_cmutex.h"
 #include "base_cobject.h"
 
 namespace BASE {
 
 #define REFERENCE ::BASE::CReference
-
-//! create module
-void STATIC_CReference__Create();
-//! destroy module
-void STATIC_CReference__Destroy();
 
 template <class T>
 class CReference {
@@ -81,17 +75,12 @@ public:
 
 namespace BASE {
 
-extern ::BASE::CMutex * GLOBAL_CReference__pMutex;
-
-
 /////////////////////////////////////////////////////////////////////////////
 template <class T>
 void CReference<T>::__construct(T * pObject) {
   m_pObject = pObject;
   if (m_pObject != NULL) {
-    GLOBAL_CReference__pMutex->Acquire();
     m_pObject->SetReferences(m_pObject->GetReferences() + 1);
-    GLOBAL_CReference__pMutex->Release();
   }
 } // __construct
 
@@ -102,10 +91,8 @@ void CReference<T>::__destruct() {
   if (m_pObject != NULL) {
     T_ULONG uReferences = 0;
 
-    GLOBAL_CReference__pMutex->Acquire();
     uReferences = m_pObject->GetReferences() - 1;
     m_pObject->SetReferences(uReferences);
-    GLOBAL_CReference__pMutex->Release();
 
     if (uReferences == 0) {
       if (m_pObject->GetStorage() == ::BASE::CObject::DYNAMIC) {

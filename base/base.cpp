@@ -15,7 +15,6 @@ T_ULONG GLOBAL_uInitialized = 0;
 /////////////////////////////////////////////////////////////////////////////
 void Create() {
   if (GLOBAL_uCreated == 0) {
-    STATIC_CReference__Create();
   }
   GLOBAL_uCreated = GLOBAL_uCreated + 1;
 } // Create
@@ -43,7 +42,6 @@ void Destroy() {
   Shutdown(true);
   GLOBAL_uCreated = GLOBAL_uCreated - 1;
   if (GLOBAL_uCreated == 0) {
-    STATIC_CReference__Destroy();
   }
 } // Destroy
 
