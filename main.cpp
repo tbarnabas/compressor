@@ -45,7 +45,7 @@ __T_INT main(__T_INT iArgc, __T_CHAR * * pArgv) {
         }
 
         // create a new output
-        tOutput.Create(new ::CPR::COutput("out.txt"));
+        tOutput.Create(new ::CPR::COutput());
         
         // start timer
         dUserTime = user_time();
