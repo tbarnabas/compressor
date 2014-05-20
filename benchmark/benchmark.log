@@ -1,0 +1,24 @@
+HUFFMAN COMPRESSION
+news | 377109 -> 247815 byte(s) | 65.71% | cpu time: 0.117982
+book1 | 768771 -> 441088 byte(s) | 57.38% | cpu time: 0.229965
+kennedy.xls | 1029744 -> 464330 byte(s) | 45.09% | cpu time: 0.268959
+HUFFMAN DECOMPRESSION
+news.huff | 247815 -> 377109 byte(s) | 152.17% | cpu time: 0.066989
+book1.huff | 441088 -> 768771 byte(s) | 174.29% | cpu time: 0.108983
+kennedy_xls.huff | 464330 -> 1029744 byte(s) | 221.77% | cpu time: 0.120982
+LZ1 COMPRESSION
+news | 377109 -> 231429 byte(s) | 61.37% | cpu time: 0.590910
+book1 | 768771 -> 497930 byte(s) | 64.77% | cpu time: 1.370792
+kennedy.xls | 1029744 -> 351686 byte(s) | 34.15% | cpu time: 2.594606
+LZ1 DECOMPRESSION
+news.lz1 | 231429 -> 377109 byte(s) | 162.95% | cpu time: 0.026996
+book1.lz1 | 497930 -> 768771 byte(s) | 154.39% | cpu time: 0.055992
+kennedy_xls.lz1 | 351686 -> 1029744 byte(s) | 292.80% | cpu time: 0.058991
+LZ2 COMPRESSION
+news | 377109 -> 205573 byte(s) | 54.51% | cpu time: 0.738888
+book1 | 768771 -> 446520 byte(s) | 58.08% | cpu time: 1.747734
+kennedy.xls | 1029744 -> 339974 byte(s) | 33.02% | cpu time: 2.764580
+LZ2 DECOMPRESSION
+news.lz2 | 205573 -> 377109 byte(s) | 183.44% | cpu time: 0.025996
+book1.lz2 | 446520 -> 768771 byte(s) | 172.17% | cpu time: 0.049993
+kennedy_xls.lz2 | 339974 -> 1029744 byte(s) | 302.89% | cpu time: 0.070989
