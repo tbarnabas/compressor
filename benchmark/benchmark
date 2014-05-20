@@ -1,0 +1,79 @@
+rm benchmark.log
+
+rm news.huff
+rm book1.huff
+rm kennedy_xls.huff
+rm news.huff.new
+rm book1.huff.new
+rm kennedy_xls.huff.new
+
+rm news.lz1
+rm book1.lz1
+rm kennedy_xls.lz1
+rm news.lz1.new
+rm book1.lz1.new
+rm kennedy_xls.lz1.new
+
+rm news.lz2
+rm book1.lz2
+rm kennedy_xls.lz2
+rm news.lz2.new
+rm book1.lz2.new
+rm kennedy_xls.lz2.new
+
+
+echo "HUFFMAN COMPRESSION" >> benchmark.log 
+echo "HUFFMAN COMPRESSION"
+echo "news"
+./cpr -huff news > news.huff
+echo "book1"
+./cpr -huff book1 > book1.huff
+echo "kennedy.xls"
+./cpr -huff kennedy.xls > kennedy_xls.huff
+
+echo "HUFFMAN DECOMPRESSION" >> benchmark.log 
+echo "HUFFMAN DECOMPRESSION"
+echo "news"
+./cpr -expand news.huff > news.huff.new
+echo "book1"
+./cpr -expand book1.huff > book1.huff.new
+echo "kennedy.xls"
+./cpr -expand kennedy_xls.huff > kennedy_xls.huff.new
+
+
+echo "LZ1 COMPRESSION" >> benchmark.log 
+echo "LZ1 COMPRESSION"
+echo "news"
+./cpr -lz1 news > news.lz1
+echo "book1"
+./cpr -lz1 book1 > book1.lz1
+echo "kennedy.xls"
+./cpr -lz1 kennedy.xls > kennedy_xls.lz1
+
+echo "LZ1 DECOMPRESSION" >> benchmark.log 
+echo "LZ1 DECOMPRESSION"
+echo "news"
+./cpr -expand news.lz1 > news.lz1.new
+echo "book1"
+./cpr -expand book1.lz1 > book1.lz1.new
+echo "kennedy.xls"
+./cpr -expand kennedy_xls.lz1 > kennedy_xls.lz1.new
+
+
+echo "LZ2 COMPRESSION" >> benchmark.log 
+echo "LZ2 COMPRESSION"
+echo "news"
+./cpr -lz2 news > news.lz2
+echo "book1"
+./cpr -lz2 book1 > book1.lz2
+echo "kennedy.xls"
+./cpr -lz2 kennedy.xls > kennedy_xls.lz2
+
+echo "LZ2 DECOMPRESSION" >> benchmark.log 
+echo "LZ2 DECOMPRESSION"
+echo "news"
+./cpr -expand news.lz2 > news.lz2.new
+echo "book1"
+./cpr -expand book1.lz2 > book1.lz2.new
+echo "kennedy.xls"
+./cpr -expand kennedy_xls.lz2 > kennedy_xls.lz2.new

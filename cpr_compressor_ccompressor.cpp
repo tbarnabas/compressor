@@ -1,0 +1,41 @@
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// cpr_compressor_ccompressor.cpp - ::CPR::COMPRESSOR::CCompressor class source
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#include "cpr_compressor_ccompressor.h"
+
+namespace CPR {
+
+namespace COMPRESSOR {
+
+/////////////////////////////////////////////////////////////////////////////
+CCompressor::CCompressor(::CPR::types type) : 
+  m_Type(type) {
+} // CCompressor
+
+
+/////////////////////////////////////////////////////////////////////////////
+CCompressor::~CCompressor() {
+} // ~CCompressor
+
+
+/////////////////////////////////////////////////////////////////////////////
+CCompressor::CCompressor(const CCompressor & tCompressor) :
+  ::BASE::CObject(tCompressor),
+  m_Type(tCompressor.m_Type) {
+} // CCompressor
+
+
+/////////////////////////////////////////////////////////////////////////////
+CCompressor & CCompressor::operator=(const CCompressor & tCompressor) {
+  ::BASE::CObject::operator=(tCompressor);
+  m_Type = tCompressor.m_Type;
+  return (* this);
+} // operator=
+
+} // namespace COMPRESSOR
+
+} // namespace CPR
