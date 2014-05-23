@@ -39,7 +39,7 @@ start_timer ()
 }
 
 
-/* Returns elapsed time since last call to start_timer().  Returns ERROR_VALUE
+/* Returns elapsed time since last call to start_timer().  Returns ERROR_VALUE */
 /* if Start_Timer() has never been called. */
 #ifdef __STDC__
 double  elapsed_time (void) 
