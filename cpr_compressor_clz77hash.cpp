@@ -211,7 +211,7 @@ void CLZ77Hash::Compress(::BASE::CArray<T_BYTE> * pInput, ::CPR::COutput * pOutp
       T_ULONG uLength = uLookOffset;    
       pMatchPosition = Match(&(* pInput)[uPosition], CheckSum(&(* pInput)[uPosition], uSize), &(* pInput)[uPosition], &uLength);
 
-      if ((pMatchPosition != NULL) && (uLength >= 2)) {
+      if ((pMatchPosition != NULL) && (uLength >= 2) && (uLength >= uSize)) {
 //        printf("IT IS MATCHED MATCH POSITION: %p, LENGTH: %d, SIZE: %d\n", pMatchPosition, uLength, uSize);
         uMatchOffset = &(* pInput)[uPosition] - pMatchPosition;
         uMatchLength = uLength;
