@@ -21,6 +21,19 @@ rm news.lz2.new
 rm book1.lz2.new
 rm kennedy_xls.lz2.new
 
+rm news.lz3
+rm book1.lz3
+rm kennedy_xls.lz3
+rm news.lz3.new
+rm book1.lz3.new
+rm kennedy_xls.lz3.new
+
+rm news.lz4
+rm book1.lz4
+rm kennedy_xls.lz4
+rm news.lz4.new
+rm book1.lz4.new
+rm kennedy_xls.lz4.new
 
 echo "HUFFMAN COMPRESSION" >> benchmark.log 
 echo "HUFFMAN COMPRESSION"
@@ -115,3 +128,5 @@ echo "book1"
 ./cpr -expand book1.lz4 > book1.lz4.new
 echo "kennedy.xls"
 ./cpr -expand kennedy_xls.lz4 > kennedy_xls.lz4.new
+
+more benchmark.log
