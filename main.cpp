@@ -12,6 +12,8 @@ static const char * STATIC_pUsage =
   "  -huff <file> - compress file using static Huffman\n" \
   "  -lz1 <file> - compress file using static LZ77 variation 1 (window size=2048, hash table)\n" \
   "  -lz2 <file> - compress file using static LZ77 variation 2 (window size=4096, hash table)\n" \
+  "  -lz3 <file> - compress file using static LZ77 variation 3 (window size=2048, linear)\n" \
+  "  -lz4 <file> - compress file using static LZ77 variation 4 (window size=4096, linear)\n" \
   "  -expand <file> - expand file\n" \
   "  -h, --help - display help\n";
 
@@ -36,7 +38,7 @@ __T_INT main(__T_INT iArgc, __T_CHAR * * pArgv) {
       __T_DOUBLE dUserTime = 0;
       __T_DOUBLE dElapsedTime = 0;
 
-      if ((T_STRING(pArgv[1]) == "-huff") || (T_STRING(pArgv[1]) == "-lz1") || (T_STRING(pArgv[1]) == "-lz2") || (T_STRING(pArgv[1]) == "-expand")) {
+      if ((T_STRING(pArgv[1]) == "-huff") || (T_STRING(pArgv[1]) == "-lz1") || (T_STRING(pArgv[1]) == "-lz2") || (T_STRING(pArgv[1]) == "-lz3") || (T_STRING(pArgv[1]) == "-lz4") || (T_STRING(pArgv[1]) == "-expand")) {
         // create a new input
         if (iArgc > 2) {
           tInput.Create(new ::CPR::CInput(pArgv[2]));
@@ -68,6 +70,16 @@ __T_INT main(__T_INT iArgc, __T_CHAR * * pArgv) {
             tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Hash(::CPR::LZ77_2));     
             break;
           }
+          case ::CPR::LZ77_3 : {
+            // create a new lz77 compressor
+            tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Linear(::CPR::LZ77_3));     
+            break;
+          }
+          case ::CPR::LZ77_4 : {
+            // create a new lz77 compressor
+            tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Linear(::CPR::LZ77_4));     
+            break;
+          }
           }
 
           // expand input
@@ -82,6 +94,12 @@ __T_INT main(__T_INT iArgc, __T_CHAR * * pArgv) {
           } else if (T_STRING(pArgv[1]) == "-lz2") {
             // create a new lz77 compressor
             tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Hash(::CPR::LZ77_2, 4096));     
+          } else if (T_STRING(pArgv[1]) == "-lz3") {
+            // create a new lz77 compressor
+            tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Hash(::CPR::LZ77_3, 2048));     
+          } else if (T_STRING(pArgv[1]) == "-lz4") {
+            // create a new lz77 compressor
+            tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Hash(::CPR::LZ77_4, 4096));     
           }
 
           // write compressor type

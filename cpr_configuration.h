@@ -29,7 +29,9 @@ enum operations {
 enum types {
   HUFFMAN = 13,
   LZ77_1 = 17,
-  LZ77_2 = 19 };
+  LZ77_2 = 19,
+  LZ77_3 = 20,
+  LZ77_4 = 21 };
 
 }
 

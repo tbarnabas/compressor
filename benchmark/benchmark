@@ -77,3 +77,41 @@ echo "book1"
 ./cpr -expand book1.lz2 > book1.lz2.new
 echo "kennedy.xls"
 ./cpr -expand kennedy_xls.lz2 > kennedy_xls.lz2.new
+
+
+echo "LZ3 COMPRESSION" >> benchmark.log 
+echo "LZ3 COMPRESSION"
+echo "news"
+./cpr -lz3 news > news.lz3
+echo "book1"
+./cpr -lz3 book1 > book1.lz3
+echo "kennedy.xls"
+./cpr -lz3 kennedy.xls > kennedy_xls.lz3
+
+echo "LZ3 DECOMPRESSION" >> benchmark.log 
+echo "LZ3 DECOMPRESSION"
+echo "news"
+./cpr -expand news.lz3 > news.lz3.new
+echo "book1"
+./cpr -expand book1.lz3 > book1.lz3.new
+echo "kennedy.xls"
+./cpr -expand kennedy_xls.lz3 > kennedy_xls.lz3.new
+
+
+echo "LZ4 COMPRESSION" >> benchmark.log 
+echo "LZ4 COMPRESSION"
+echo "news"
+./cpr -lz4 news > news.lz4
+echo "book1"
+./cpr -lz4 book1 > book1.lz4
+echo "kennedy.xls"
+./cpr -lz4 kennedy.xls > kennedy_xls.lz4
+
+echo "LZ4 DECOMPRESSION" >> benchmark.log 
+echo "LZ4 DECOMPRESSION"
+echo "news"
+./cpr -expand news.lz4 > news.lz4.new
+echo "book1"
+./cpr -expand book1.lz4 > book1.lz4.new
+echo "kennedy.xls"
+./cpr -expand kennedy_xls.lz4 > kennedy_xls.lz4.new

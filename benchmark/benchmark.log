@@ -1,24 +1,24 @@
 HUFFMAN COMPRESSION
-news | 377109 -> 247815 byte(s) | 65.71% | cpu time: 0.167975
+news | 377109 -> 247815 byte(s) | 65.71% | cpu time: 0.166975
 book1 | 768771 -> 441088 byte(s) | 57.38% | cpu time: 0.327950
-kennedy.xls | 1029744 -> 464330 byte(s) | 45.09% | cpu time: 0.380942
+kennedy.xls | 1029744 -> 464330 byte(s) | 45.09% | cpu time: 0.382942
 HUFFMAN DECOMPRESSION
-news.huff | 247815 -> 377109 byte(s) | 152.17% | cpu time: 0.075989
-book1.huff | 441088 -> 768771 byte(s) | 174.29% | cpu time: 0.159976
-kennedy_xls.huff | 464330 -> 1029744 byte(s) | 221.77% | cpu time: 0.177972
+news.huff | 247815 -> 377109 byte(s) | 152.17% | cpu time: 0.088987
+book1.huff | 441088 -> 768771 byte(s) | 174.29% | cpu time: 0.157975
+kennedy_xls.huff | 464330 -> 1029744 byte(s) | 221.77% | cpu time: 0.180973
 LZ1 COMPRESSION
-news | 377109 -> 228797 byte(s) | 60.67% | cpu time: 0.768883
-book1 | 768771 -> 482167 byte(s) | 62.72% | cpu time: 1.667747
-kennedy.xls | 1029744 -> 348672 byte(s) | 33.86% | cpu time: 2.866565
+news | 377109 -> 228797 byte(s) | 60.67% | cpu time: 0.790880
+book1 | 768771 -> 482167 byte(s) | 62.72% | cpu time: 1.712740
+kennedy.xls | 1029744 -> 348672 byte(s) | 33.86% | cpu time: 2.966549
 LZ1 DECOMPRESSION
-news.lz1 | 228797 -> 377109 byte(s) | 164.82% | cpu time: 0.034995
-book1.lz1 | 482167 -> 768771 byte(s) | 159.44% | cpu time: 0.079988
-kennedy_xls.lz1 | 348672 -> 1029744 byte(s) | 295.33% | cpu time: 0.085986
+news.lz1 | 228797 -> 377109 byte(s) | 164.82% | cpu time: 0.037995
+book1.lz1 | 482167 -> 768771 byte(s) | 159.44% | cpu time: 0.078987
+kennedy_xls.lz1 | 348672 -> 1029744 byte(s) | 295.33% | cpu time: 0.093986
 LZ2 COMPRESSION
-news | 377109 -> 201023 byte(s) | 53.31% | cpu time: 0.944857
-book1 | 768771 -> 421003 byte(s) | 54.76% | cpu time: 2.047688
-kennedy.xls | 1029744 -> 330469 byte(s) | 32.09% | cpu time: 2.774579
+news | 377109 -> 201023 byte(s) | 53.31% | cpu time: 0.939857
+book1 | 768771 -> 421003 byte(s) | 54.76% | cpu time: 2.107680
+kennedy.xls | 1029744 -> 330469 byte(s) | 32.09% | cpu time: 2.860565
 LZ2 DECOMPRESSION
-news.lz2 | 201023 -> 377109 byte(s) | 187.59% | cpu time: 0.039993
-book1.lz2 | 421003 -> 768771 byte(s) | 182.60% | cpu time: 0.076989
-kennedy_xls.lz2 | 330469 -> 1029744 byte(s) | 311.60% | cpu time: 0.091986
+news.lz2 | 201023 -> 377109 byte(s) | 187.59% | cpu time: 0.036995
+book1.lz2 | 421003 -> 768771 byte(s) | 182.60% | cpu time: 0.081987
+kennedy_xls.lz2 | 330469 -> 1029744 byte(s) | 311.60% | cpu time: 0.095985

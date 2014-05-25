@@ -1,7 +1,6 @@
 
 CC = g++
 CFLAGS += -Wall
-LIBS += -lpthread
 
 VPATH := $(VPATH)
 

@@ -2,7 +2,7 @@
 BINARY = cpr
 
 CFLAGS += -DPROCESSOR_ARCHITECTURE=PAF_X86 -DOPERATING_SYSTEM=OSF_LINUX
-VPATH += base datastructure
+VPATH += base
 
 SOURCES = \
   base.cpp \
