@@ -96,10 +96,10 @@ __T_INT main(__T_INT iArgc, __T_CHAR * * pArgv) {
             tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Hash(::CPR::LZ77_2, 4096));     
           } else if (T_STRING(pArgv[1]) == "-lz3") {
             // create a new lz77 compressor
-            tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Hash(::CPR::LZ77_3, 2048));     
+            tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Linear(::CPR::LZ77_3, 2048));     
           } else if (T_STRING(pArgv[1]) == "-lz4") {
             // create a new lz77 compressor
-            tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Hash(::CPR::LZ77_4, 4096));     
+            tCompressor.Create(new ::CPR::COMPRESSOR::CLZ77Linear(::CPR::LZ77_4, 4096));     
           }
 
           // write compressor type
