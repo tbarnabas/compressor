@@ -10,6 +10,45 @@
 namespace CPR {
 
 /////////////////////////////////////////////////////////////////////////////
+void CFile::STATIC_Wait(__T_INT iDescriptor, operations operation, const T_TIME & tTimeOut) {
+  if (tTimeOut.IsValid() == true) {
+    fd_set tSet;
+    struct timeval tTime;
+    __T_INT iResult;
+
+    // set timeout
+    tTime.tv_sec = tTimeOut.GetDelaySec();
+    tTime.tv_usec = tTimeOut.GetDelayUSec();
+
+    // initialize descriptor set
+    FD_ZERO(&tSet);
+    FD_SET(iDescriptor, &tSet);
+
+    // waiting for operation
+    switch (operation) {
+    case READ : {
+      iResult = select(iDescriptor + 1, &tSet, NULL, NULL, &tTime);
+      break;            
+    }
+    case WRITE : {
+      iResult = select(iDescriptor + 1, NULL, &tSet, NULL, &tTime);
+      break;
+    }
+    default : {
+      break;
+    }
+    }
+
+    if (iResult <= 0) {
+      EXCEPTION(CPR, ::CPR::CFile, STATIC_Wait,
+      MESSAGE("WARNING: waiting is timed out"));
+      THROW(EFile, TIMED_OUT);
+    }
+  }
+} // STATIC_Wait
+
+
+/////////////////////////////////////////////////////////////////////////////
 void CFile::__construct() {
   m_pFile = NULL;
   m_TotalRead = 0;
@@ -130,41 +169,68 @@ T_ULONG CFile::GetSize() {
 
 
 /////////////////////////////////////////////////////////////////////////////
-REFERENCE< ::BASE::CArray<T_BYTE> > CFile::Read(T_ULONG uLength) {
+REFERENCE< ::BASE::CArray<T_BYTE> > CFile::Read(T_ULONG uLength, const T_TIME tTimeOut) {
   REFERENCE< ::BASE::CArray<T_BYTE> > tResult;
   T_ULONG uNumber = 0;
+
+  // waiting for read
+  STATIC_Wait(fileno(m_pFile), READ, tTimeOut);
 
   if (uLength == 0) {
     uLength = GetSize();
   }
 
-  // create a new result
-  tResult.Create(new ::BASE::CArray<T_BYTE>(NULL, uLength));
+  if (uLength != (T_ULONG)-1) {
+    // create a new result
+    tResult.Create(new ::BASE::CArray<T_BYTE>(NULL, uLength));
 
-  // read data from file
-  uNumber = fread(tResult->GetElements(), sizeof(T_BYTE), tResult->GetSize(), m_pFile);
-  m_TotalRead = m_TotalRead + uNumber;
-  if (uNumber != uLength) {
-    EXCEPTION(CPR, ::CPR::CFile, Read,
-    MESSAGE("unable to read"));
-    THROW(EFile, UNABLE_TO_READ);
+    // read data from file
+    uNumber = fread(tResult->GetElements(), sizeof(T_BYTE), tResult->GetSize(), m_pFile);
+
+    m_TotalRead = m_TotalRead + uNumber;
+    if (uNumber != uLength) {
+      EXCEPTION(CPR, ::CPR::CFile, Read,
+      MESSAGE("unable to read"));
+      THROW(EFile, UNABLE_TO_READ);
+    }
+  } else {
+    T_ULONG uSize = 0;
+    T_BYTE b;
+    REFERENCE< ::BASE::CArray<T_BYTE> > tExtended;
+    
+    while (feof(m_pFile) == 0) {
+      uNumber = fread(&b, sizeof(T_BYTE), 1, m_pFile);
+      if (uNumber == 1) {
+        tExtended.Create(new ::BASE::CArray<T_BYTE>(NULL, uSize + uNumber));   
+        if (tResult.IsValid() == true) {
+          ::BASE::CArray<T_BYTE>::STATIC_Copy(tResult->GetElements(), tExtended->GetElements(), tResult->GetSize());
+        }
+        (* tExtended)[uSize] = b;
+        tResult = tExtended;
+        uSize = uSize + uNumber;
+        m_TotalRead = m_TotalRead + uNumber;               
+      }
+    }
   }
 
-//  printf("%ld byte(s) read from file (name=\"%s\")\n", uNumber, C_STR(m_Name));
+//  printf("%d byte(s) read from file (name=\"%s\")\n", m_TotalRead, C_STR(m_Name));
 
   return (tResult);
 } // Read
 
 
 /////////////////////////////////////////////////////////////////////////////
-void CFile::Write(::BASE::CArray<T_BYTE> * pBuffer) {
-  Write(pBuffer->GetElements(), pBuffer->GetSize());
+void CFile::Write(::BASE::CArray<T_BYTE> * pBuffer, const T_TIME tTimeOut) {
+  Write(pBuffer->GetElements(), pBuffer->GetSize(), tTimeOut);
 } // Write
 
 
 /////////////////////////////////////////////////////////////////////////////
-void CFile::Write(T_BYTE * pBuffer, T_ULONG uSize) {
+void CFile::Write(T_BYTE * pBuffer, T_ULONG uSize, const T_TIME tTimeOut) {
   T_ULONG uNumber = 0;
+
+  // waiting for read
+  STATIC_Wait(fileno(m_pFile), WRITE, tTimeOut);
 
   // write data into file
   uNumber = fwrite((const void *)pBuffer, sizeof(T_BYTE), uSize, m_pFile);
@@ -179,7 +245,7 @@ void CFile::Write(T_BYTE * pBuffer, T_ULONG uSize) {
 //  ::BASE::Dump(pBuffer, uSize);
 
   
-//  printf("%ld byte(s) written into file (name=\"%s\")\n", uNumber, C_STR(m_Name));
+//  printf("%ld byte(s) written into file (name=\"%s\")\n", m_TotalWrite, C_STR(m_Name));
 } // Write
 
 } // namespace CPR

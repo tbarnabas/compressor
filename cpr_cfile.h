@@ -20,7 +20,8 @@ DERIVE_EXCEPTION_BEGIN(::BASE::EObject, EFile)
   FILE_NOT_FOUND,
   UNABLE_TO_CREATE_FILE,
   UNABLE_TO_READ,
-  UNABLE_TO_WRITE
+  UNABLE_TO_WRITE,
+  TIMED_OUT
 DERIVE_EXCEPTION_END(EFile);
 
 class CPR_EXPORT_IMPORT CFile :
@@ -41,7 +42,10 @@ public:
     CASE_TO_ENUMERATION(READ)
     CASE_TO_ENUMERATION(WRITE)
     CASE_TO_ENUMERATION(APPEND));
-	
+
+  //! waiting for the specified operation
+  static void STATIC_Wait(__T_INT iDescriptor, operations operation, const T_TIME & tTimeOut);
+
 protected:
   //! pointer to file stream
   FILE * m_pFile;
@@ -72,11 +76,11 @@ public:
   T_ULONG GetSize();
 
   //! read buffer
-  REFERENCE< ::BASE::CArray<T_BYTE> > Read(T_ULONG uLength = 0);
+  REFERENCE< ::BASE::CArray<T_BYTE> > Read(T_ULONG uLength = 0, const T_TIME tTimeOut = T_TIME(0xffffff));
   //! write buffer
-  void Write(::BASE::CArray<T_BYTE> * pBuffer);
+  void Write(::BASE::CArray<T_BYTE> * pBuffer, const T_TIME tTimeOut = T_TIME(0xffffff));
   //! write buffer
-  void Write(T_BYTE * pBuffer, T_ULONG uSize);
+  void Write(T_BYTE * pBuffer, T_ULONG uSize, const T_TIME tTimeOut = T_TIME(0xffffff));
 }; // class CPR_EXPORT_IMPORT CFile
 
 } // namespace CPR
